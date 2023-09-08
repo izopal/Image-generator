@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор зображень</title>
+    <link rel="stylesheet" href="./style.css">
+<body>
+    <div class="container">
+        <h1>Генератор зображень</h1>
+        <p>....</p>
+        <form class="gen-form" action="">
+            <div class="input-wrapper">
+                <input type="text" id="user-prompt" placeholder="Введіть ваш запит сюди..." autocomplete="off">
+                <span class="icon close">
+                    <svg class="ionicon" viewBox="0 0 512 512">
+                        <path stroke-width="32" 
+                              d="M368 368L144 144M368 144L144 368"
+                        />
+                    </svg>
+                </span>
+                <span class="line"></span>
+            </div>
+            <button id="generate" type="button" >Згенерувати</button>
+        </form>
+
+
+
+        <div class="result">
+            <div class="loading">Загрузка</div>
+            <div class="image-grid"></div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html> 

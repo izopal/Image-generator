@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
+
+:root {
+    --backgroundColor: #221f2f; /* Ваш власний колір #221f2f */
+    --textColor:        #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:var(--backgroundColor);
+    min-height: 100vh;
+    user-select: none;
+   
+}
+.container{
+    position: relative;
+    min-width: 65vh;
+    padding: 10vh;
+    background: rgba(0, 0, 0, .44);
+    color: var(--textColor);
+    border: 2px solid rgba(0, 0, 0, .1);
+    border-bottom-left-radius: 10vh;
+    border-top-right-radius: 20vh;
+    box-shadow: -.5rem -.5rem 1rem rgba(255, 255, 255, .1),       
+                 .5rem  .5rem 1rem rgba(0, 0, 0, .35),
+          inset -.5rem -.5rem 1rem rgba(255, 255, 255, .1),
+          inset  .5rem  .5rem 1rem rgba(0, 0, 0, .35);
+    /* backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px); */
+}
+/* .container::before{
+    content: "";
+    position: absolute;
+    background-color: #ed2ff0;
+    width: 120px;
+    height: 120px;
+    filter: blur(140px);
+    left: -20%;
+    top: 10%;
+    z-index: -1;
+}
+.container::after{
+    position: absolute;
+    content: "";
+    background-color: #675afe;
+    width: 120px;
+    height: 120px;
+    filter: blur(140px);
+    right: -20%;
+    bottom: -10%;
+    z-index: -1 ;
+} */
+h1{
+    font-size: 5rem;
+    font-weight: 600;
+    letter-spacing: .5rem;
+}
+p{
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: .25rem;
+    color: var(--textColor);
+    text-align: justify;
+}
+.container .gen-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+.container .gen-form .input-wrapper{
+    position: relative;
+    width: 70%;
+    padding: 0 15px;
+    transition: .5s linear;
+}
+.container .gen-form input {
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    opacity: 0;
+    animation: slideTop 1.8s ease forwards;
+    /* transition: .5s all ease; */
+}
+@keyframes slideTop {
+    0%{
+        transform: translatey(10vh);
+        opacity: 0;
+        color: rgb(255, 255, 255, 0.5);
+    }
+    100%{
+        transform: translatey(0);
+        opacity: 1;
+    }
+} 
+
+.container .gen-form .input-wrapper .icon.close {
+    position: absolute;
+    top: -12%;
+    right: -2%;
+    height: 3.75rem;
+    padding: .175rem;
+    transform: scale(0);
+    transition: all .5s linear;
+}
+.container .gen-form .input-wrapper .icon.close:hover{
+    padding: 0;
+}
+.container .gen-form .input-wrapper .icon.close .ionicon {
+    height: 100%;
+    width: auto;
+    stroke: var(--backgroundColor);
+    fill: rgba(255, 255, 255, .1);
+    filter: 
+    drop-shadow(1px 1px 1px rgba(0, 0, 0, .65));
+}
+.container .gen-form .input-wrapper .line {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, .1);
+    box-shadow: -.25rem -.25rem .5rem rgba(255, 255, 255, .1),       
+                 .25rem  .25rem .5rem rgba(0, 0, 0, .35),
+          inset -.25rem -.25rem .5rem rgba(255, 255, 255, .1),
+          inset  .25rem  .25rem .5rem rgba(0, 0, 0, .35);
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+.container .gen-form button{
+    width: 30%;
+    height: 3.75rem;
+    border-radius: .625rem;
+    border: .25rem solid var(--backgroundColor);
+    box-shadow: -.25rem -.25rem .5rem rgba(255, 255, 255, .1),       
+                 .25rem  .25rem .5rem rgba(0, 0, 0, .35);
+    text-align: center;
+    letter-spacing: .25rem;
+    font-size: 1.75rem;
+    color: #737373;
+    background-color: transparent;
+}
+.container .gen-form button:active {
+    border: 0rem solid var(--backgroundColor);
+    box-shadow:        
+          inset -.5rem -.5rem 1rem rgba(255, 255, 255, .1),
+          inset  .5rem  .5rem 1rem rgba(0, 0, 0, .35);
+}
+.container .loading {
+    display: none;
+    font-size: 1.75rem;
+    margin: 10px 0;
+}
