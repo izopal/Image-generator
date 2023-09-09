@@ -2,6 +2,7 @@
 
 :root {
     --backgroundColor: #221f2f; /* Ваш власний колір #221f2f */
+    --color:        #737373;
     --textColor:        #fff;
 }
 
@@ -21,12 +22,15 @@ body{
    
 }
 .container{
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-width: 65vh;
-    padding: 10vh;
+    padding: 5vh;
     background: rgba(0, 0, 0, .44);
     color: var(--textColor);
-    border: 2px solid rgba(0, 0, 0, .1);
+    border: .25rem solid rgba(0, 0, 0, .1);
     border-bottom-left-radius: 10vh;
     border-top-right-radius: 20vh;
     box-shadow: -.5rem -.5rem 1rem rgba(255, 255, 255, .1),       
@@ -36,55 +40,36 @@ body{
     /* backdrop-filter: blur(7.4px);
     -webkit-backdrop-filter: blur(7.4px); */
 }
-/* .container::before{
-    content: "";
-    position: absolute;
-    background-color: #ed2ff0;
-    width: 120px;
-    height: 120px;
-    filter: blur(140px);
-    left: -20%;
-    top: 10%;
-    z-index: -1;
-}
-.container::after{
-    position: absolute;
-    content: "";
-    background-color: #675afe;
-    width: 120px;
-    height: 120px;
-    filter: blur(140px);
-    right: -20%;
-    bottom: -10%;
-    z-index: -1 ;
-} */
 h1{
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: 600;
-    letter-spacing: .5rem;
+    letter-spacing: .25rem;
 }
-p{
+/* p{
     font-size: 2.5rem;
     font-weight: 300;
     letter-spacing: .25rem;
     color: var(--textColor);
     text-align: justify;
-}
+} */
 .container .gen-form {
     display: flex;
+    opacity: 1;
     gap: 10px;
     width: 100%;
-    margin-top: 20px;
+    margin: 2vh 0vh;
 }
 .container .gen-form .input-wrapper{
     position: relative;
     width: 70%;
-    padding: 0 15px;
+    padding: 0 3vw;
     transition: .5s linear;
 }
 .container .gen-form input {
     width: 100%;
+    height: 3.75rem;
     text-align: center;
+    font-size: 1.75rem;
     background-color: transparent;
     color: #fff;
     cursor: pointer;
@@ -160,8 +145,93 @@ p{
           inset -.5rem -.5rem 1rem rgba(255, 255, 255, .1),
           inset  .5rem  .5rem 1rem rgba(0, 0, 0, .35);
 }
-.container .loading {
+
+.container .result {
+    position: relative;
+    width: 20.25vh;
+    height: 20.25vh;
+}
+.container .result .loading {
     display: none;
     font-size: 1.75rem;
-    margin: 10px 0;
+    text-align: center;
+    line-height: 20.25vh;
+}
+.container .result .image-grid {
+    position: absolute;
+    width: 14.25vh;
+    height: 14.25vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+               perspective(1000px)    
+               rotateY(0deg);
+    transform-style: preserve-3d;
+    transition: 1.5s;
+}
+.container .result .image-grid span{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(27.5vh);
+    -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004)  /*відзеркалення обєкта*/
+}
+.container .result .image-grid span img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    transition: all .3s linear;
+    object-fit: cover;
+    user-select: none;
+}
+.container .result .image-grid span img:hover{
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+}
+
+.container .btns {
+    display: flex;
+    width: 25%;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.container .btns .btn {
+    position: relative;
+    width: 4rem;
+    height: 100%;
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+.container .btns .btn.prev{
+    transform: rotate(225deg);
+}
+.container .btns .btn:active{
+    background: var(--textColor);
+}
+.container .btns .btn::before{
+    position: absolute;
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border-top:   .2rem solid var(--textColor);
+    border-right: .2rem solid var(--textColor);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container .btns .btn:active:before{
+    border-top:   .2rem solid var(--backgroundColor);
+    border-right: .2rem solid var(--backgroundColor);
 }

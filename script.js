@@ -1,4 +1,3 @@
-
 const textElement = document.querySelector('*');                        // Отримуємо елемент, текст якого потрібно змінювати
 
 // Функція для оновлення розміру тексту
@@ -39,16 +38,14 @@ iconClose.addEventListener('click', () => {
   imageGrid.innerHTML             = "";
 });
 
-const generate          = document.getElementById('generate');
-const imageGrid         = document.querySelector('.image-grid');
+// ================================================================================>
 
 const apiKey            = "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";
-const maxImage          = 4 // максимальна кількість зображннь яка буде генеруватися
-let selectedImageNumber = null;
+const maxImage          = 8 // максимальна кількість зображннь яка буде генеруватися
 
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+
+const generate     = document.getElementById('generate');
+const imageGrid    = document.querySelector('.image-grid');
 
 function disableGenerateButton(){
   generate.disabled = true;
@@ -59,6 +56,10 @@ function enableGenerateButton(){
 function clearImageGrid(){
   imageGrid.innerHTML = "";
 }
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
 async function generateImage(input){
   disableGenerateButton();
   clearImageGrid();
@@ -68,13 +69,12 @@ async function generateImage(input){
 
   const imageUrls       = [];
   for (let i = 0; i < maxImage; ++i){
-    const randomNumber = getRandomNumber(1, 1000);
+    const randomNumber = getRandomNumber(1, 10000);
     const prompt = `${input} ${randomNumber}`;
     const response = await fetch(
       "https://api-inference.huggingface.co/models/prompthero/openjourney",
       {
         headers: { 
-          "Content-Type" : "application/json",
           "Authorization": `Bearer ${apiKey}`, 
         },
         method: "POST",
@@ -86,17 +86,19 @@ async function generateImage(input){
   const imgUrl = URL.createObjectURL(blob);
   imageUrls.push(imgUrl);
 
-  const img = document.createElement('img');
-  img.src = imgUrl;
-  img.alt = `art-$(i+1)`;
-  img.onclick = () => downloadImage(imgUrl, i);
-  imageGrid.appendChild(img);
+  const span         = document.createElement('span');            // Створюємо <span>
+  span.style.setProperty('--i', `${i + 1}`);                      // Встановлюємо атрибут style
+  imageGrid.appendChild(span);                                    // Додаємо <span> до контейнера imageGrid
+
+  const img          = document.createElement('img');             // Створюємо <img>
+  img.src            = imgUrl;                                    // Встановлюємо атрибут src
+  img.alt            = `art-${i+1}`;                              // Встановлюєио атрибут alt
+  img.onclick = () => downloadImage(imgUrl, i);                   // Додаємо обробник подій onclick (загрузка)
+  span.appendChild(img);                                          // Додаємо <img> до <span>
   }
 
   loading.style.display = "none"
   enableGenerateButton();
-
-  selectedImageNumber = null;
 }
 
 generate.addEventListener('click', () =>{
@@ -112,4 +114,23 @@ function downloadImage(imgUrl, imageNumber){
 
 }
 
+// ================================================================================>
  
+const prev = document.querySelector('.btn.prev');
+const next = document.querySelector('.btn.next');
+
+let degrees = 0;
+
+prev.addEventListener('click', () => {
+  degrees += 45;
+  imageGrid.style = `transform: translate(-50%, -50%) 
+                                perspective(1000px) 
+                                rotateY(${degrees}deg) `;
+})
+next.addEventListener('click', () => {
+  degrees -= 45;
+  imageGrid.style = `transform: translate(-50%, -50%) 
+                                perspective(1000px) 
+                                rotateY(${degrees}deg) `;
+})
+
