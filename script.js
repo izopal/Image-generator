@@ -34,12 +34,13 @@ const apiKey       = "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";
 const maxImage     = 8 // максимальна кількість зображннь яка буде генеруватися
 // функція для генерування зображень задопомогою штучного інтелекту
 async function generateImage(input){
-  generate.disabled     = true;
-  imageGrid.innerHTML   = "";
-  loading.style.display = 'block';
-  spiner.style.display  = 'block';
+  generate.disabled       = true;
+  imageGrid.innerHTML     = "";
+  imageGrid.style.display = 'none';
+  loading.style.display   = 'block';
+  spiner.style.display    = 'block';
   
-  const imageUrls       = [];
+  const imageUrls         = [];
   for (let i = 0; i < maxImage; ++i){
     const randomNumber = Math.floor(Math.random() * 999 + 1);
     const prompt       = `${input} ${randomNumber}`;
@@ -59,9 +60,10 @@ async function generateImage(input){
   imageUrls.push(imgUrl);
   }
 
-  loading.style.display = 'none';
-  spiner.style.display  = 'none';
-  generate.disabled     = false;
+  loading.style.display   = 'none';
+  spiner.style.display    = 'none';
+  generate.disabled       = false;
+  imageGrid.style.display = 'block';
   imageGrid.addEventListener('mouseover', () => form.style.opacity = 0);
   imageGrid.addEventListener('mouseout',  () => form.style.opacity = 1);
   displayImages(imageUrls);   
@@ -91,9 +93,9 @@ input.addEventListener('input', function() {
       inputLine.style.transformOrigin = 'left';
       iconClose.style.transform       = 'scale(1)';
   } else {
-    iconClose.style.transform           = 'scale(0)';
-    inputLine.style.transform           = 'scaleX(0)';
-    inputLine.style.transformOrigin     = 'right';
+    iconClose.style.transform         = 'scale(0)';
+    inputLine.style.transform         = 'scaleX(0)';
+    inputLine.style.transformOrigin   = 'right';
   }
 });
 // очищаємо поле для введення "input" і зникнення лінії підкреслення при натисканні на іконку закриття
@@ -103,6 +105,8 @@ iconClose.addEventListener('click', () => {
   inputLine.style.transformOrigin     = 'right';
   input.value                         = '';
   imageGrid.innerHTML                 = "";
+  imageGrid.style.display             = 'none';
+
 });
 // запускаємо генератор зображень при нажиманні клавіші Enter в полі input
 input.addEventListener('keydown', function(event) {
