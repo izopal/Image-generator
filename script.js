@@ -117,14 +117,12 @@ generate.addEventListener('click', () => {
 let degrees = 0;
 prev.addEventListener('click', () => {
   degrees += 45;
-  // imageGrid.style.display  = 'block';
   imageGrid.style = `transform: translate(-50%, -50%) 
                                 perspective(1000px) 
                                 rotateY(${degrees}deg) `;
 })
 next.addEventListener('click', () => {
   degrees -= 45;
-  // imageGrid.style.display  = 'block';
   imageGrid.style = `transform: translate(-50%, -50%) 
                                 perspective(1000px) 
                                 rotateY(${degrees}deg) `;
