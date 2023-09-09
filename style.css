@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap');
 
 :root {
-    --backgroundColor: #221f2f; /* Ваш власний колір #221f2f */
-    --color:        #737373;
-    --textColor:        #fff;
+    --backgroundColor: #221f2f; 
+    --color:           #737373;
+    --textColor:       #fff;
 }
 
 * {
@@ -12,6 +12,7 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
+
 body{
     display: flex;
     align-items: center;
@@ -19,7 +20,6 @@ body{
     background:var(--backgroundColor);
     min-height: 100vh;
     user-select: none;
-   
 }
 .container{
     display: flex;
@@ -37,27 +37,32 @@ body{
                  .5rem  .5rem 1rem rgba(0, 0, 0, .35),
           inset -.5rem -.5rem 1rem rgba(255, 255, 255, .1),
           inset  .5rem  .5rem 1rem rgba(0, 0, 0, .35);
-    /* backdrop-filter: blur(7.4px);
-    -webkit-backdrop-filter: blur(7.4px); */
 }
+
 h1{
     font-size: 3.5rem;
     font-weight: 600;
     letter-spacing: .25rem;
+    animation: slideSize 1.8s ease forwards;
 }
-/* p{
-    font-size: 2.5rem;
-    font-weight: 300;
-    letter-spacing: .25rem;
-    color: var(--textColor);
-    text-align: justify;
-} */
+@keyframes slideSize {
+    0%{
+        font-size: 0rem;
+        opacity: 0;
+        color: rgb(255, 255, 255, 0.5);
+    }
+    100%{
+        font-size: 3.5rem;
+        opacity: 1;
+    }
+} 
+
 .container .gen-form {
     display: flex;
-    opacity: 1;
-    gap: 10px;
     width: 100%;
     margin: 2vh 0vh;
+    opacity: 1;
+    transition: opacity .3s linear;
 }
 .container .gen-form .input-wrapper{
     position: relative;
@@ -65,19 +70,18 @@ h1{
     padding: 0 3vw;
     transition: .5s linear;
 }
-.container .gen-form input {
+.container .gen-form .input-wrapper input {
     width: 100%;
     height: 3.75rem;
     text-align: center;
     font-size: 1.75rem;
     background-color: transparent;
     color: #fff;
-    cursor: pointer;
-    outline: none;
-    border: none;
     opacity: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
     animation: slideTop 1.8s ease forwards;
-    /* transition: .5s all ease; */
 }
 @keyframes slideTop {
     0%{
@@ -93,12 +97,11 @@ h1{
 
 .container .gen-form .input-wrapper .icon.close {
     position: absolute;
-    top: -12%;
-    right: -2%;
+    top: 0;
+    right: 0;
     height: 3.75rem;
-    padding: .175rem;
-    transform: scale(0);
-    transition: all .5s linear;
+    padding: .275rem;
+    transition: padding .1s linear;
 }
 .container .gen-form .input-wrapper .icon.close:hover{
     padding: 0;
@@ -123,23 +126,35 @@ h1{
                  .25rem  .25rem .5rem rgba(0, 0, 0, .35),
           inset -.25rem -.25rem .5rem rgba(255, 255, 255, .1),
           inset  .25rem  .25rem .5rem rgba(0, 0, 0, .35);
-    transform: scaleX(0);
-    transition: transform .5s;
 }
-.container .gen-form button{
+.container .gen-form .generate{
     width: 30%;
     height: 3.75rem;
-    border-radius: .625rem;
+    margin-left: 2rem;
+    background-color: transparent;
     border: .25rem solid var(--backgroundColor);
+    border-radius: .625rem;
     box-shadow: -.25rem -.25rem .5rem rgba(255, 255, 255, .1),       
                  .25rem  .25rem .5rem rgba(0, 0, 0, .35);
     text-align: center;
-    letter-spacing: .25rem;
     font-size: 1.75rem;
+    letter-spacing: .15rem;
     color: #737373;
-    background-color: transparent;
+    cursor: pointer;
+    /* animation: slideButton 1.8s ease forwards; */
 }
-.container .gen-form button:active {
+/* @keyframes slideButton {
+    0%{
+        font-size: 0rem;
+        opacity: 0;
+        color: rgb(255, 255, 255, 0.5);
+    }
+    100%{
+        font-size: 1.75rem;
+        opacity: 1;
+    }
+}  */
+.container .gen-form .generate:active {
     border: 0rem solid var(--backgroundColor);
     box-shadow:        
           inset -.5rem -.5rem 1rem rgba(255, 255, 255, .1),
@@ -151,12 +166,34 @@ h1{
     width: 20.25vh;
     height: 20.25vh;
 }
+
+.container .result .spiner{
+    display: none;
+}
+.container .result .spiner span{
+    position: absolute;
+    top: 50%;
+    left: calc((.5 - (7.725 / 20.25)) * 100%);
+    width: 2rem;
+    height: .5rem;
+    border-radius: .1rem;
+    background: transparent;
+    transform-origin: 7.725rem;
+    transform: rotate(calc(var(--i) * (360deg / 22)));
+    animation: animateBlink 22s linear infinite;
+    animation-delay: calc(var(--i) * (22s / 22));
+}
+@keyframes animateBlink {
+    0%  {background-color: var(--textColor);}
+    50% {background-color: var(--color);}
+}
 .container .result .loading {
     display: none;
     font-size: 1.75rem;
     text-align: center;
     line-height: 20.25vh;
 }
+
 .container .result .image-grid {
     position: absolute;
     width: 14.25vh;
@@ -205,16 +242,19 @@ h1{
     height: 4rem;
     align-items: center;
     justify-content: space-evenly;
+    cursor: pointer;
 }
 .container .btns .btn {
     position: relative;
     width: 4rem;
     height: 100%;
     border-radius: 50%;
-    transform: rotate(45deg);
 }
 .container .btns .btn.prev{
     transform: rotate(225deg);
+}
+.container .btns .btn.next{
+    transform: rotate(45deg);
 }
 .container .btns .btn:active{
     background: var(--textColor);
@@ -230,7 +270,6 @@ h1{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .container .btns .btn:active:before{
     border-top:   .2rem solid var(--backgroundColor);
     border-right: .2rem solid var(--backgroundColor);

@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <h1>Генератор зображень</h1>
-        <!-- <p>....</p> -->
         <form class="gen-form" action="">
             <div class="input-wrapper">
                 <input type="text" id="user-prompt" placeholder="Введіть ваш запит сюди..." autocomplete="off">
@@ -22,10 +21,34 @@
                 </span>
                 <span class="line"></span>
             </div>
-            <button id="generate" type="button" >Згенерувати</button>
+            <button class="generate" type="button" >Згенерувати</button>
         </form>
         <div class="result">
             <div class="loading">Загрузка</div>
+            <div class="spiner">
+                <span style="--i:0;"  ></span>
+                <span style="--i:1;"  ></span>
+                <span style="--i:2;"  ></span>
+                <span style="--i:3;"  ></span>
+                <span style="--i:4;"  ></span>
+                <span style="--i:5;"  ></span>
+                <span style="--i:6;"  ></span>
+                <span style="--i:7;"  ></span>
+                <span style="--i:8;"  ></span>
+                <span style="--i:9;"  ></span>
+                <span style="--i:10;" ></span>
+                <span style="--i:11;" ></span>
+                <span style="--i:12;" ></span>
+                <span style="--i:13;" ></span>
+                <span style="--i:14;" ></span>
+                <span style="--i:15;" ></span>
+                <span style="--i:16;" ></span>
+                <span style="--i:17;" ></span>
+                <span style="--i:18;" ></span>
+                <span style="--i:19;" ></span>
+                <span style="--i:20;" ></span>
+                <span style="--i:21;" ></span>
+            </div>
             <div class="image-grid"></div>
         </div>
         <div class="btns">
