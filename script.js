@@ -90,7 +90,11 @@ input.addEventListener('input', function() {
       inputLine.style.transform       = 'scaleX(1)';
       inputLine.style.transformOrigin = 'left';
       iconClose.style.transform       = 'scale(1)';
-  } 
+  } else {
+    iconClose.style.transform           = 'scale(0)';
+    inputLine.style.transform           = 'scaleX(0)';
+    inputLine.style.transformOrigin     = 'right';
+  }
 });
 // очищаємо поле для введення "input" і зникнення лінії підкреслення при натисканні на іконку закриття
 iconClose.addEventListener('click', () => {
