@@ -136,6 +136,28 @@ next.addEventListener('click', () => {
                                 rotateY(${degrees}deg) `;
 })
 
+// перехід між згенерованими картинками задопомогою swipe вліво/вправо
+let touchX          = 0; 
+const touchTreshold = 50;
+window.addEventListener('touchmove', (e) => {
+  const swipeDistance = e.changedTouches[0].pageX - touchX;
+  if (swipeDistance < -touchTreshold) {
+    degrees += 45;
+    imageGrid.style = `transform: translate(-50%, -50%)
+                                  perspective(1000px)
+                                  rotateY(${degrees}deg)`;
+  } else if (swipeDistance > touchTreshold) {
+    degrees -= 45;
+    imageGrid.style = `transform: translate(-50%, -50%)
+                                  perspective(1000px)
+                                  rotateY(${degrees}deg)`;
+  }
+  touchX = e.changedTouches[0].pageX;
+});
+
+
+
+
 // функція автоматичної загрузки при кліку на вибране зображення
 // function downloadImage(imgUrl, imageNumber){
 //   const link = document.createElement("a");
@@ -143,6 +165,12 @@ next.addEventListener('click', () => {
 //   link.download = `image-${imageNumber +1}.jpg`;
 //   link.click();  
 // }
+
+
+
+
+                                  
+  
 
 
 
